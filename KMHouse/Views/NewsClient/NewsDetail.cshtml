@@ -1,0 +1,157 @@
+﻿@model Models.ViewModels.NewsViewModel
+@{
+    ViewBag.Title = "Tin chi tiết";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var listNews = (List<Models.ViewModels.NewsViewModel>)ViewBag.ListNews;
+    var listRecent = (List<Models.ViewModels.NewsViewModel>)ViewBag.ListRecent;
+    var listRelate = (List<Models.ViewModels.NewsViewModel>)ViewBag.ListRelate;
+    var listNewsCategory = (List<Models.EF.NewsCategory>)ViewBag.ListNewsCategory;
+    var newsCategory = (Models.EF.NewsCategory)ViewBag.NewsCategory;
+    var listTag = (List<Models.EF.Tag>)ViewBag.ListTag;
+}
+<!-- Begin Li's Breadcrumb Area -->
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="/tin-tuc">Tin tức</a></li>
+                <li><a href="/tin-tuc/@Model.NewsCategoryID">@Model.NewsCategoryName</a></li>
+                <li class="active">@Model.Name</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Li's Breadcrumb Area End Here -->
+<!-- Begin Li's Main Blog Page Area -->
+<div class="li-main-blog-page li-main-blog-details-page pt-60 pb-60 pb-sm-45 pb-xs-45">
+    <div class="container">
+        <div class="row">
+            <!-- Begin Li's Blog Sidebar Area -->
+            <div class="col-lg-3 order-lg-1 order-2">
+                <div class="li-blog-sidebar-wrapper">
+                    <div class="li-blog-sidebar pt-25">
+                        <h4 class="li-blog-sidebar-title">Danh mục tin</h4>
+                        <ul class="li-blog-archive">
+                            @foreach (var item in listNewsCategory)
+                            {
+                                int itemCount = listNews.Count(x => x.NewsCategoryID.Equals(item.ID));
+                                if (itemCount > 0)
+                                {
+                                    <li><a href="/tin-tuc/@item.MetaTitle-@item.ID">@item.Name (@listNews.Count(x => x.NewsCategoryID.Equals(item.ID)))</a></li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                    <div class="li-blog-sidebar">
+                        <h4 class="li-blog-sidebar-title">Bài gần đây</h4>
+                        @foreach (var item2 in listRecent)
+                        {
+                            <div class="li-blog-single-item pb-30">
+                                <div class="li-blog-banner" style="padding-right:70px">
+                                    <a href="/chi-tiet-tin/@item2.MetaTitle-@item2.ID"><img class="img-full" src="@item2.Image" alt="@item2.Name"></a>
+
+                                </div>
+                                <div class="li-blog-content">
+                                    <div class="li-blog-details">
+                                        <p class="li-blog-heading pt-25">
+                                            <a href="/chi-tiet-tin/@item2.MetaTitle-@item2.ID">@item2.Name</a>
+                                            <span> @string.Format("{0:dd/MM/yyyy}", item2.CreateDate)</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                    <div class="li-blog-sidebar">
+                        <h4 class="li-blog-sidebar-title">Tags</h4>
+                        <ul class="li-blog-tags">
+                            @foreach (var tag in listTag)
+                            {
+                                <li><a href="/tag/@tag.ID">@tag.Name</a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Li's Blog Sidebar Area End Here -->
+            <!-- Begin Li's Main Content Area -->
+            <div class="col-lg-9 order-lg-2 order-1">
+                <div class="row li-main-content">
+                    <div class="col-lg-12">
+                        <div class="li-blog-single-item pb-30">
+                            <div class="li-blog-content">
+                                <div class="li-blog-details">
+                                    <h2 class="li-blog-heading"><a href="#">@Model.Name</a></h2>
+                                    <div class="li-blog-meta">
+                                        <a class="author"><i class="fa fa-user"></i> @Model.CreateBy</a>
+                                        <a class="comment"><i class="fa fa-hashtag"></i> @Model.NewsCategoryName</a>
+                                        <a class="post-time"><i class="fa fa-calendar"></i> @string.Format("{0:dd/MM/yyyy}", @Model.CreateDate)</a>
+                                    </div>
+                                    @Html.Raw(Model.Detail)
+                                    <div class="li-tag-line">
+                                        <h4>tag:</h4>
+                                        @foreach (var tag in listTag)
+                                        {
+                                            <a href="/tag/@tag.ID">@tag.Name</a><span>,</span>
+                                        }
+                                    </div>
+                                    <div class="li-blog-sharing text-center pt-30">
+                                        <h4>Chia sẻ bài viết:</h4>
+                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                        <a href="#"><i class="fa fa-twitter"></i></a>
+                                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--relate news-->
+                        <div class="li-blog-sidebar">
+                            <h3 class="li-blog-sidebar-title">Tin cùng danh mục</h3>
+                        </div>
+                        <div class="col-lg-12 order-lg-3 order-1">
+                            <div class="row li-main-content">
+
+                                @if (listRelate.Count > 0)
+                                {
+                                    foreach (var newsRelate in listRelate)
+                                    {
+                                        <div class="col-lg-4 col-md-4">
+                                            <div class="li-blog-single-item pb-25">
+                                                <div class="li-blog-banner">
+                                                    <a href="/chi-tiet-tin/@newsRelate.MetaTitle-@newsRelate.ID"><img class="img-full" src="@newsRelate.Image" alt="@newsRelate.Name"></a>
+                                                </div>
+                                                <div class="li-blog-content">
+                                                    <div class="li-blog-details">
+                                                        <h3 class="li-blog-heading pt-25"><a href="/chi-tiet-tin/@newsRelate.MetaTitle-@newsRelate.ID">@newsRelate.Name</a></h3>
+                                                        <div class="li-blog-meta">
+                                                            <a class="author"><i class="fa fa-user"></i> @newsRelate.CreateBy</a>
+                                                            <a class="comment"><i class="fa fa-hashtag"></i> @newsRelate.NewsCategoryName</a>
+                                                            <a class="post-time"><i class="fa fa-calendar"></i> @string.Format("{0:dd/MM/yyyy}", @newsRelate.CreateDate)</a>
+                                                        </div>
+                                                        @Html.Raw(newsRelate.Description.Length < 200 ? newsRelate.Description : newsRelate.Description.Substring(0, 150))
+                                                        <a class="read-more" href="/chi-tiet-tin/@newsRelate.MetaTitle-@newsRelate.ID">Chi tiết...</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="border-top">Không có sản tin nào</div>
+                                }
+
+                            </div>
+                        </div>
+                        <!--relate news end-->
+                    </div>
+                </div>
+            </div>
+            <!-- Li's Main Content Area End Here -->
+        </div>
+    </div>
+</div>
+<!-- Li's Main Blog Page Area End Here -->

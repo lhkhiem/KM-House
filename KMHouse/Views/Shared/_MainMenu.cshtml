@@ -1,0 +1,57 @@
+﻿@using Models.DAO;
+@{
+    var categoryList = new ProductCategoryDao().ListAll();
+    var newsCategoryList = new NewsCategoryDao().ListAll();
+}
+<div class="hb-menu hb-menu-2 d-xl-block">
+    <nav>
+        <ul>
+            <li class="dropdown-holder"><a href="/">Trang chủ</a></li>
+            @{var category = categoryList.Where(x => x.ParentID == null).OrderBy(x => x.DisplayOrder); }
+            <li class="megamenu-holder">
+                <a href="/shop/">Shop</a>
+                <ul class="megamenu hb-megamenu">
+                    @foreach (var cate in category)
+                    {
+                        <li>
+                            <a href="/san-pham/@cate.MetaTitle-@cate.ID">@cate.Name</a>
+                            <ul>
+                                @foreach (var item in categoryList.Where(x => x.ParentID == cate.ID))
+                                {
+                                    <li><a href="/san-pham/@item.MetaTitle-@item.ID">@item.Name </a></li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                </ul>
+            </li>
+            <li class="dropdown-holder">
+                <a href="/tin-tuc/">Tin tức</a>
+                <ul class="hb-dropdown">
+                    @foreach (var item2 in newsCategoryList.Where(x=>x.ParentID==null))
+                    {
+                        var listChild = new NewsCategoryDao().ListAll().Where(x => x.ParentID.Equals(item2.ID));
+                        <li class="sub-dropdown-holder">
+                            <a href="/tin-tuc/@item2.MetaTitle-@item2.ID">@item2.Name</a>
+                            <ul class="hb-dropdown hb-sub-dropdown">
+                                @foreach (var child in listChild)
+                                {
+                                    <li><a href="/tin-tuc/@child.MetaTitle-@child.ID">@child.Name</a></li>
+                                }
+                            </ul>
+                        </li>
+                    }
+
+                </ul>
+            </li>
+            <li><a href="/gioi-thieu/">Giới thiệu</a></li>
+            <li><a href="/lien-he/">Liên hệ</a></li>
+            <!-- Begin Header Bottom Menu Information Area -->
+            <li class="hb-info f-right p-0 d-sm-none d-lg-block">
+                <span>25/17A Nguyễn Bỉnh Khiêm, TP.Rạch Giá </span>
+                <span class="badge badge-danger phone">088 69 39 879</span>
+            </li>
+            <!-- Header Bottom Menu Information Area End Here -->
+        </ul>
+    </nav>
+</div>

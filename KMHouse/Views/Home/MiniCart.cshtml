@@ -1,0 +1,54 @@
+﻿@model List<Models.ViewModels.CartItemViewModel>
+<div class="header-middle-right">
+    <ul class="hm-menu">
+        <!-- Begin Header Middle Wishlist Area -->
+        <!-- <li class="hm-wishlist">
+            <a href="wishlist.html">
+                <span class="cart-item-count wishlist-item-count">0</span>
+                <i class="fa fa-print"></i>
+            </a>
+        </li> -->
+        <!-- Header Middle Wishlist Area End Here -->
+        <!-- Begin Header Mini Cart Area -->
+        <li class="hm-minicart">
+            <div class="hm-minicart-trigger">
+                <span class="item-icon"></span>
+                <span class="item-text">
+                    <span id="totalMiniCart">@Model.Sum(x => (double)(x.Quantity) * (x.Product.PromotionPrice.GetValueOrDefault(0) > 0 ? (double)x.Product.PromotionPrice : (double)x.Product.Price)).ToString("N0") đ</span>
+                    <span id="quantityMiniCart" class="cart-item-count">@Model.Count()</span>
+                </span>
+            </div>
+            <span></span>
+            <div class="minicart">
+                <ul class="minicart-product-list">
+                    @foreach (var item in Model)
+                    {
+                        <li>
+                            <a href="/chi-tiet/@item.Product.MetaTitle-@item.Product.ID" class="minicart-product-image">
+                                <img src="@item.Product.Image" alt="cart products">
+                            </a>
+                            <div class="minicart-product-details">
+                                <h6><a href="/chi-tiet/@item.Product.MetaTitle-@item.Product.ID">@(item.Product.Name.Length > 10 ? item.Product.Name.Substring(0, 10) + "..." : item.Product.Name)</a></h6>
+                                <span>@((item.Product.PromotionPrice.GetValueOrDefault(0) > 0 ? (double)item.Product.PromotionPrice : (double)item.Product.Price).ToString("N0")) đ x @item.Quantity</span>
+                            </div>
+                            <button class="close btn-delete" data-id="@item.Product.ID">
+                                <i class="fa fa-close"></i>
+                            </button>
+                        </li>
+                    }
+
+                </ul>
+                <p class="minicart-total">Tổng: <span>@Model.Sum(x => (double)(x.Quantity) * (x.Product.PromotionPrice.GetValueOrDefault(0) > 0 ? (double)x.Product.PromotionPrice : (double)x.Product.Price)).ToString("N0") đ</span></p>
+                <div class="minicart-button">
+                    <a href="/gio-hang/" class="li-button li-button-dark li-button-fullwidth li-button-sm">
+                        <span>Giỏ hàng</span>
+                    </a>
+                    <a href="/dat-hang/" class="li-button li-button-fullwidth li-button-sm">
+                        <span>Checkout</span>
+                    </a>
+                </div>
+            </div>
+        </li>
+        <!-- Header Mini Cart Area End Here -->
+    </ul>
+</div>

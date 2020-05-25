@@ -1,0 +1,163 @@
+﻿@model Models.EF.Product
+@{
+    ViewBag.Title = "Sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@section JsFooter{
+    <script src="~/Asset/Admin/Js/controller/ProductController.js"></script>
+}
+@section headertitle{
+    Thêm mới sản phẩm
+    <span class="alert" style="color:rebeccapurple; margin-left:10px">
+        <i class="fa fa-info-circle"> @ViewBag.info</i>
+    </span>
+}
+@section headermenuroot{Sản phẩm}@section headermenusub{Thêm mới}
+<section class="content">
+    <div class="box box-default">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group-sm">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-sm-12 control-label" })
+                            <div class="col-sm-12">
+                                @Html.TextBoxFor(model => model.Name, htmlAttributes: new { @id = "txtName", @class = "form-control", @placeholder = "Tên sản phẩm" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group-sm">
+                            @Html.LabelFor(model => model.MetaTitle, htmlAttributes: new { @class = "col-sm-12 control-label" })
+                            <div class="col-sm-12">
+                                @Html.TextBoxFor(model => model.MetaTitle, htmlAttributes: new { @class = "form-control", @id = "txtMetaTitle" })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group-sm">
+                            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "col-sm-6 control-label" })
+                            <div class="col-sm-12">
+                                @Html.TextBoxFor(model => model.Price, htmlAttributes: new { @id = "price", @class = "form-control", @placeholder = "0 vnđ", @type = "number" })
+                            </div>
+                            <div class="col-sm-12">
+                                <span>><label class="convertNumber" id="convertPrice">0đ</label></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group-sm">
+                            @Html.LabelFor(model => model.PromotionPrice, htmlAttributes: new { @class = "col-sm-6 control-label" })
+                            <div class="col-sm-12">
+                                @Html.TextBoxFor(model => model.PromotionPrice, htmlAttributes: new { @id = "promotionPrice", @class = "form-control", @placeholder = "0 vnđ", @type = "number" })
+                            </div>
+                            <div class="col-sm-12">
+                                <span>><label class="convertNumber" id="convertPromotionPrice">0đ</label></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group-sm">
+                            @Html.LabelFor(model => model.UnitID, htmlAttributes: new { @class = "col-sm-12 control-label" })
+                            <div class="col-sm-12">
+                                @Html.DropDownListFor(model => model.UnitID, null, htmlAttributes: new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group-sm">
+                            @Html.LabelFor(model => model.ProductCategoryID, htmlAttributes: new { @class = "col-sm-12 control-label" })
+                            <div class="col-sm-12">
+                                @Html.DropDownListFor(model => model.ProductCategoryID, null, htmlAttributes: new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group-sm">
+                            @Html.LabelFor(model => model.TopHot, htmlAttributes: new { @class = "col-sm-12 control-label" })
+                            <div class="col-sm-12">
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.TextBoxFor(model => model.TopHot, htmlAttributes: new { @id = "datepicker1", @class = "form-control pull-right", @placeholder = "dd/mm/yyy" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group-sm">
+                            @Html.LabelFor(model => model.Tag, htmlAttributes: new { @class = "col-sm-12 control-label" })
+                            <div class="col-sm-12">
+                                @Html.TextBoxFor(model => model.Tag, htmlAttributes: new { @class = "form-control", @id = "txtMetaTitle", @required = "true", @placeholder = "tag1,tag2,tag3,tagx.." })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group-sm">
+                            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "col-sm-6 control-label" })
+                            <div class="col-sm-12">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(model => model.Image, htmlAttributes: new { @id = "txtImage", @class = "form-control", @placeholder = "Duyệt Url ảnh" })
+                                    <div class="input-group-btn">
+                                        <a id="btnImage" href="#" class="btn btn-sm bg-olive btn-flat">Duyệt</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group-sm">
+                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "col-sm-6 control-label" })
+                            <div class="col-sm-12">
+                                @Html.TextAreaFor(model => model.Description, htmlAttributes: new { @id = "txtDescription", @class = "form-control", @placeholder = "Mô tả ngắn" })
+                                <script>CKEDITOR.replace("txtDescription");</script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group-sm">
+                            @Html.LabelFor(model => model.Detail, htmlAttributes: new { @class = "col-sm-6 control-label" })
+                            <div class="col-sm-12">
+                                @Html.TextAreaFor(model => model.Detail, htmlAttributes: new { @id = "txtDetail", @class = "form-control", @placeholder = "Mô tả ngắn" })
+                                <script>CKEDITOR.replace("txtDetail");</script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group-sm">
+                            <div class="col-sm-12">
+                                <label style="margin-top:30px">
+                                    Kích hoạt
+                                    @Html.CheckBoxFor(model => model.Status, new { @class = "flat-red", @checked = "checked" })
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-info btn-sm">Thêm mới</button>
+                    <a href="@Url.Action("Index")" class="btn btn-success btn-sm">Danh sách</a>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+

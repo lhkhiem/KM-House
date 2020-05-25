@@ -1,0 +1,73 @@
+﻿@model Models.EF.Contact
+@{
+    ViewBag.Title = "Liên hệ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Begin Li's Breadcrumb Area -->
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="/">Trang chủ</a></li>
+                <li class="active">Liên hệ</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Li's Breadcrumb Area End Here -->
+<!-- Begin Contact Main Page Area -->
+<div class="contact-main-page mt-60 mb-40 mb-md-40 mb-sm-40 mb-xs-40">
+    <div class="container mb-60">
+        VỊ TRÍ TRÊN BẢN ĐỒ
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d982.2375234835758!2d105.08971317451363!3d10.02097719191399!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a0b3981bab89f9%3A0xe5a76106a09780a9!2zMjUsIDE3IE5ndXnhu4VuIELhu4luaCBLaGnDqm0sIFbEqW5oIFRoYW5oLCBS4bqhY2ggR2nDoSwgdOG7iW5oIEtpw6puIEdpYW5nLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1587614342784!5m2!1svi!2s" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 offset-lg-1 col-md-12 order-1 order-lg-2">
+                <div class="contact-page-side-content">
+                    @Html.Raw(Model.Content)
+                </div>
+            </div>
+            
+            <div class="col-lg-6 col-md-12 order-2 order-lg-1">
+                <div class="contact-form-content pt-sm-55 pt-xs-55">
+                    <h3 class="contact-page-title">Thông tin phản hồi</h3>
+                    <div class="contact-form">
+                        <form method="get">
+                            <div class="form-group">
+                                <label>Họ tên <span class="required">*</span></label>
+                                <input type="text" id="customername" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Địa chỉ Email <span class="required">*</span></label>
+                                <input type="email" id="customerEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Địa chỉ</label>
+                                <input type="text" id="contactAddress" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Điện thoại</label>
+                                <input type="text" id="contactPhone" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Tiêu đề</label>
+                                <input type="text" id="contactSubject" required> 
+                            </div>
+                            <div class="form-group mb-30">
+                                <label>Nội dung</label>
+                                <textarea id="contactMessage" style="height:100px" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button id="submit" class="li-btn-3">Gửi</button>
+                                <label id="info" class="pull-right"></label>
+                            </div>
+                        </form>
+                    </div>
+                    <p class="form-messege"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact Main Page Area End Here -->

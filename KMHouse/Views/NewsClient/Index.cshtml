@@ -1,0 +1,109 @@
+﻿@model IEnumerable<Models.ViewModels.NewsViewModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Tin tức";
+
+}
+<!-- Begin Li's Breadcrumb Area -->
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="/">Trang chủ</a></li>
+                <li class="active">Tin tức</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Li's Breadcrumb Area End Here -->
+<!-- Begin Li's Main Blog Page Area -->
+<div class="li-main-blog-page pt-60 pb-55">
+    <div class="container">
+        <div class="row">
+            <!-- Begin Li's Main Content Area -->
+            <div class="col-lg-12">
+                <div class="row li-main-content">
+                    @foreach (var news in Model)
+                    {
+                        <div class="col-lg-4 col-md-6">
+                            <div class="li-blog-single-item pb-25">
+                                <div class="li-blog-banner">
+                                    <a href="/chi-tiet-tin/@news.MetaTitle-@news.ID"><img class="img-full" src="@news.Image" alt="@news.Name"></a>
+                                </div>
+                                <div class="li-blog-content">
+                                    <div class="li-blog-details">
+                                        <h3 class="li-blog-heading pt-25"><a href="/chi-tiet-tin/@news.MetaTitle-@news.ID">@news.Name</a></h3>
+                                        <div class="li-blog-meta">
+                                            <a class="author" href="#"><i class="fa fa-user"></i>@news.CreateBy</a>
+                                            <a class="comment" href="#"><i class="fa fa-hashtag"></i> @news.NewsCategoryName</a>
+                                            <a class="post-time" href="#"><i class="fa fa-calendar"></i> @string.Format("{0:dd/MM/yyyy}", @news.CreateDate)</a>
+                                        </div>
+                                        @Html.Raw(news.Description.Length < 200 ? news.Description : news.Description.Substring(0, 150))
+                                        <p><a class="read-more" href="/chi-tiet-tin/@news.MetaTitle-@news.ID">Chi tiết...</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <!-- Begin Li's Pagination Area -->
+                    @{
+                        if (ViewBag.TotalPage > 1)
+                        {
+                            var pageDisplay = (int)ViewBag.MaxPage;//Tổng số trang cho phép hiển thị trên trang hiện tại, tránh hiển thị nhiều trang trên thanh trang
+                            int totalPage = (int)ViewBag.TotalPage;//tổng số record
+                            int currentPage = ((int)ViewBag.PageIndex);//Trang hiện tại
+
+                            // Create numeric links
+                            //Tính toán để hiển thị số trang trên thanh
+                            var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
+                            var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
+                            //link gán cho nút
+                            var link = "/tin-tuc/";
+                            <div class="col-lg-12">
+                                <div class="li-paginatoin-area text-center pt-25">
+                                    <div class="row">
+                                        <div class="col-lg-2 col-md-2 pt-xs-15">
+                                            <p class="text-left">Hiển thị @ViewBag.recordStartPosition-@ViewBag.recordEndPosition of @ViewBag.totalRecord tin(s)</p>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10">
+                                            <ul class="pagination-box pt-xs-20 pb-xs-15">
+                                                @if (currentPage > ViewBag.First)
+                                                {
+                                                    <li><a href="@link?pageIndex=@ViewBag.First"><i class="fa fa-fast-backward"></i></a></li>
+                                                    <li><a href="@link?pageIndex=@ViewBag.Prev"><i class="fa fa-step-backward"></i></a></li>
+                                                }
+                                                @for (int k = startPageIndex; k <= endPageIndex; k++)
+                                                {
+                                                    if (currentPage == k)
+                                                    {
+                                                        <li class="active"> <a href="@link?pageIndex=@k" title="Trang @k">@k</a></li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li><a href="@link?pageIndex=@k" title="Trang @k">@k</a></li>
+                                                    }
+                                                }
+                                                @if (currentPage < totalPage)
+                                                {
+                                                    <li><a href="@link?pageIndex=@ViewBag.Next" class="Next"><i class="fa fa-step-forward"></i></a></li>
+                                                    <li><a href="@link?pageIndex=@ViewBag.Last" class="Next"><i class="fa fa-fast-forward"></i></a></li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else if (ViewBag.totalRecord == 0)
+                        {
+                            <div class="border-top">Không có sản tin nào</div>
+                        }
+                    }
+                    <!-- Li's Pagination End Here Area -->
+                </div>
+            </div>
+            <!-- Li's Main Content Area End Here -->
+        </div>
+    </div>
+</div>
+<!-- Li's Main Blog Page Area End Here -->

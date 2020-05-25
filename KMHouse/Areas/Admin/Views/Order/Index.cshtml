@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = "Đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@section JsFooter
+{
+    <script src="~/Asset/Admin/Js/controller/OrderController.js"></script>
+}
+@section headertitle{Danh sách đơn hàng}@section headermenuroot{Đơn hàng}@section headermenusub{Danh sách}
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <div class="row">
+                        <div class="col-sm-1">
+                            <a href="@Url.Action("Create")" id="btnAddNew" class="btn btn-default btn-sm">
+                                <i class="fa fa-plus"></i>
+                                Tạo mới
+                            </a>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="input-group">
+                                <span class="input-group-addon">Tìm theo</span>
+                                <select class="form-control input-sm" id="sltTypeSearch" name="typeSearch">
+                                    <option value="0">Tất cả</option>
+                                    <option value="1">Tên</option>
+                                    <option value="2">Nhóm người dùng</option>
+                                    <option value="3">Điện thoại</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="input-group input-group-sm">
+                                <input id="txtKeyword" value="" name="keyword" class="form-control input-sm" placeholder="Nhập từ khóa tìm kiếm" />
+                                <span class="input-group-btn">
+                                    <button id="btnSearch" type="submit" class="btn btn-info btn-flat"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="input-group">
+                                <span class="input-group-addon">Status</span>
+                                <select class="form-control input-sm" id="slStatus" name="status">
+                                    <option value="0">Tất cả</option>
+                                    <option value="1">Đơn mới</option>
+                                    <option value="2">Đơn đang giao</option>
+                                    <option value="3">Đơn đã giao</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="input-group input-group-sm">
+                                <select id="sltPageSize" class="form-control" name="PageSize">
+                                    @for (int i = 10; i <= 100; i += 5)
+                                    {
+                                        <option value="@i">@i</option>
+                                    }
+                                </select>
+                                <span class="input-group-btn">
+                                    <label class="btn">dòng/trang</label>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table id="table" class="table table-bordered table-hover table-condensed">
+                        <thead>
+                            <tr>
+                                <th><span style="margin-left:5px">#</span></th>
+                                <th>Mã</th>
+                                <th>Người mua</th>
+                                <th>Người nhận</th>
+                                <th>Điện thoại</th>
+                                <th>Email</th>
+                                <th>Ngày đặt hàng</th>
+                                <th>Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblData"></tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label id="status" style="margin-left:5px;" class="text-gray label label-success">Normal</label>
+                        </div>
+                        <div class="col-md-3">
+
+                        </div>
+                        <div class="col-md-3">
+
+                        </div>
+                        <div class="col-md-3">
+                            <p id="lbTotal" class="text-right text-bold text-blue"></p>
+                        </div>
+                    </div>
+                    <div id="pagination" class="pagination pull-left">
+                    </div>
+                    <script id="data-template" type="x-tmpl-mustache">
+                        <tr>
+                            <td style="width:70px">
+                                <a class="label label-danger btn-delete" data-id="{{ID}}"><i class="fa fa-fw fa-remove"></i></a>
+                                <a href="/Admin/Order/Detail/{{ID}}" class="label label-info btn-detail" data-id="{{ID}}"><i class="fa fa-info-circle"></i></a>
+                            </td>
+                            <td>{{ID}}</td>
+                            <td>{{NameAccount}}</td>
+                            <td>{{ShipName}}</td>
+                            <td>{{ShipMobile}}</td>
+                            <td>{{ShipEmail}}</td>
+                            <td>{{CreateDate}}</td>
+                            <td>{{{Status}}}</td>
+                        </tr>
+                    </script>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

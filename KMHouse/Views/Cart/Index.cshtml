@@ -1,0 +1,125 @@
+﻿@model List<Models.ViewModels.CartItemViewModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Giỏ hàng";
+}
+@section ScriptFooter{
+    <script src="~/Asset/Client/js/controller/CartController.js"></script>
+}
+<!-- Begin Li's Breadcrumb Area -->
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="/">Trang chủ</a></li>
+                <li class="active">Giỏ hàng</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Li's Breadcrumb Area End Here -->
+<!--Shopping Cart Area Strat-->
+
+<div class="Shopping-cart-area pt-60 pb-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                @if (Model.Count > 0)
+                {
+                    <form action="#">
+                        <div class="table-content table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="li-product-remove">Xóa</th>
+                                        <th class="li-product-thumbnail">Hình ảnh</th>
+                                        <th class="cart-product-name">Sản phẩm</th>
+                                        <th class="li-product-price">Giá</th>
+                                        <th class="li-product-quantity">Số lượng</th>
+                                        <th class="li-product-subtotal">Tổng tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{ double totalMoney = 0;}
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td class="li-product-remove"><a href="#" data-id="@item.Product.ID" class="btn-delete"><i class="fa fa-times"></i></a></td>
+                                            <td class="li-product-thumbnail"><a href="/chi-tiet/@item.Product.MetaTitle-@item.Product.ID"><img src="@item.Product.Image" alt="KStore" height="50"></a></td>
+                                            <td class="li-product-name"><a href="/chi-tiet/@item.Product.MetaTitle-@item.Product.ID">@item.Product.Name</a></td>
+                                            <td class="li-product-price">
+                                                <span class="amount">
+                                                    @{
+                                                        double price = 0;
+                                                        if (item.Product.PromotionPrice.GetValueOrDefault(0) > 0)
+                                                        {
+                                                            price = (double)item.Product.PromotionPrice;
+                                                        }
+                                                        else
+                                                        {
+                                                            price = (double)item.Product.Price;
+                                                        }
+                                                        totalMoney += price * (double)item.Quantity;
+                                                    }
+
+                                                    @price.ToString("N0") đ
+
+                                                </span>
+                                            </td>
+                                            <td class="quantity">
+                                                <div class="cart-plus-minus">
+                                                    <input data-id="@item.Product.ID" class="cart-plus-minus-box txtQuantity" value="@item.Quantity" type="text">
+                                                    <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
+                                                    <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
+                                                </div>
+                                            </td>
+                                            <td class="product-subtotal"><span class="amount">@((price * item.Quantity).ToString("N0")) đ</span></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="coupon-all">
+                                    <div class="coupon">
+                                        @*<input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Coupon code" type="text">
+                                        <input class="button" name="apply_coupon" value="Apply coupon" type="submit">*@
+
+                                        <input id="btnContinue" class="button btn" value="Tiếp tục muc hàng" />
+                                        <input id="btnDeleteAll" class="button btn" value="Xóa tất cả" />
+                                    </div>
+                                    <div class="coupon2">
+                                        <input id="btnUpdate" class="button btn" value="Cập nhật giỏ" type="submit">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 ml-auto">
+                                <div class="cart-page-total">
+                                    <h2>Thanh toán</h2>
+                                    <ul>
+                                        <li>Tổng cộng <span>@totalMoney.ToString("N0") đ</span></li>
+                                        <li>Phí vận chuyển <span>@{double charg = 0; } @charg đ</span></li>
+                                        <li class="totalMoney">Tổng tiền phải thanh toán <span>@((totalMoney + charg).ToString("N0")) đ</span></li>
+                                    </ul>
+                                    <a href="/thanh-toan/">Xác nhận thanh toán</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                }
+                else
+                {
+                    <div class="row">
+                        <span class="alert alert-info">Không có sản phẩm nào trong giỏ</span>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Shopping Cart Area End-->

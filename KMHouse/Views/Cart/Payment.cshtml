@@ -1,0 +1,55 @@
+﻿@model List<Models.ViewModels.CartItemViewModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Đặt hàng";
+}
+    <div class="breadcrumb-area">
+        <div class="container">
+            <div class="breadcrumb-content">
+                <ul>
+                    <li><a href="/">Trang chủ</a></li>
+                    <li class="active">Thông tin đặt hàng</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="page-section mb-60">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12 mb-30">
+                    <!-- Login Form s-->
+                    @using (Html.BeginForm("Payment", "Cart", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="login-form">
+                            <h4 class="login-title">Thông tin đặt hàng</h4>
+                            <div class="row">
+                                <div class="col-md-12 col-12 mb-20">
+                                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                                    @Html.Raw(ViewBag.Info)
+                                </div>
+                                <div class="col-md-12 col-12 mb-20">
+                                    <label>Họ tên người nhận</label>
+                                    <input name="shipName" class="mb-0" type="text" required placeholder="nhập họ tên" />
+                                </div>
+                                <div class="col-md-12 col-12 mb-20">
+                                    <label>Số điện thoại người nhận</label>
+                                    <input name="mobile" type="tel" class="mb-0" required placeholder="099999999(đủ 9 số điện thoại)" pattern="[0-9]{10}"/>
+                                </div>
+                                <div class="col-12 mb-20">
+                                    <label>Địa chỉ nhận hàng</label>
+                                    <input name="address" class="mb-0" required  placeholder="nhập địa chỉ"/>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <button class="register-button mt-0">Đặt hàng</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    
+

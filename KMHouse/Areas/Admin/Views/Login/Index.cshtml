@@ -1,0 +1,86 @@
+﻿@model Models.ViewModels.LoginViewModel
+@RenderPage("~/Areas/Admin/Views/Shared/_CssHeader.cshtml")
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Đăng nhập</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/Asset/Client/images/fv.png">
+</head>
+<!-- Favicon -->
+
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="/">
+                <img src="~/Asset/Client/images/menu/logo/logo2.png" />
+            </a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="login-box-body">
+            <h4 class="login-box-msg">Đăng nhập quản trị hệ thống</h4>
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
+            @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+            {
+                <div class="form-group has-feedback">
+                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @placeholder = "User name", @required="true", @autoforcus = "autoforcus" })
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    @Html.PasswordFor(model => model.Password, new { @class = "form-control", @required = "true", @placeholder = "Password" })
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-8">
+
+                        @*<div class="checkbox icheck">
+                                <label>
+                                    <input type="checkbox"> Ghi nhớ
+                                </label>
+                            </div>*@
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-xs-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Đăng nhập</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            }
+
+            <div class="social-auth-links text-center">
+                <p>- OR -</p>
+                <a href="#" class="btn btn-block btn-social btn-facebook btn-flat">
+                    <i class="fa fa-facebook"></i> Đăng nhập bằng Facebook
+                </a>
+                <a href="#" class="btn btn-block btn-social btn-google btn-flat">
+                    <i class="fa fa-google-plus"></i> Dăng nhập với Google+
+                </a>
+            </div>
+            <!-- /.social-auth-links -->
+
+            <span>Vui lòng liên hệ quản trị viên nếu quên mật khẩu!</span>
+
+        </div>
+        <!-- /.login-box-body -->
+    </div>
+    <script>
+        $(function () {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' /* optional */
+            });
+        });</script>
+</body>
+@RenderPage("~/Areas/Admin/Views/Shared/_JsFooter.cshtml")
+<script>
+    $(function () {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' /* optional */
+        });
+    });
+</script>
+</html>

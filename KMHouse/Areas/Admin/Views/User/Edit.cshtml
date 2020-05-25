@@ -1,0 +1,117 @@
+﻿@model Models.ViewModels.UserViewModel
+@{
+    ViewBag.Title = "Tài khoản";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@section headertitle{Sửa tài khoản}@section headermenuroot{Tài khoản}@section headermenusub{Sửa}
+<section class="content">
+    <div class="box box-default">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group-sm">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-sm-6 control-label" })
+                            <div class="col-sm-12">
+                                @Html.TextBoxFor(model => model.Name, htmlAttributes: new { @class = "form-control", @placeholder = "Họ tên người dùng" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group-sm">
+                            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "col-sm-6 control-label" })
+
+                            <div class="col-sm-12">
+                                @Html.TextBoxFor(model => model.Address, htmlAttributes: new { @class = "form-control", @placeholder = "Địa chỉ" })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group-sm">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-sm-6 control-label" })
+
+                            <div class="col-sm-12">
+                                @Html.TextBoxFor(model => model.Email, htmlAttributes: new { @class = "form-control", @placeholder = "Email", @type = "email" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group-sm">
+                            @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "col-sm-6 control-label" })
+                            <div class="col-sm-12">
+                                @Html.TextBoxFor(model => model.Phone, htmlAttributes: new { @class = "form-control", @placeholder = "Điện thoại", @type = "number" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group-sm">
+                            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "col-sm-6 control-label" })
+                            <div class="col-sm-12">
+                                @Html.TextBoxFor(model => model.UserName, htmlAttributes: new { @class = "form-control", @placeholder = "(viết liền không dấu)" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group-sm">
+                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "col-sm-6 control-label" })
+                            <div class="col-sm-12">
+                                @Html.PasswordFor(model => model.Password, htmlAttributes: new { @class = "form-control", @placeholder = "Mật khẩu" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group-sm">
+                            <label class="col-sm-12 control-label">Xác nhận mật khẩu</label>
+                            <div class="col-sm-12">
+                                @Html.PasswordFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "form-control", @placeholder = "Xác nhận mật khẩu" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group-sm">
+                            @Html.LabelFor(model => model.UserGroupID, htmlAttributes: new { @class = "col-sm-6 control-label" })
+                            <div class="col-sm-12">
+                                @Html.DropDownListFor(model => model.UserGroupID, null, htmlAttributes: new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group-sm">
+                            <div class="col-sm-12">
+                                <label style="margin-top:30px">
+                                    Kích hoạt
+                                    @Html.CheckBoxFor(model => model.Status, new { @class = "flat-red", @checked = "checked" })
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-info btn-sm">Cập nhật</button>
+                    <a href="@Url.Action("Index")" class="btn btn-success btn-sm">Danh sách</a>
+                    @*@Html.ActionLink("Danh sách", "Index", "User", new { @class = "btn btn-success btn-sm" })*@
+                </div>
+            </div>
+        }
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert">
+                <i>@ViewBag.info</i>
+            </div>
+        </div>
+    </div>
+</section>
+

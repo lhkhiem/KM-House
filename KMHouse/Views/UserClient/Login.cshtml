@@ -1,0 +1,54 @@
+﻿@model Models.ViewModels.LoginViewModelClient
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Đăng nhập";
+}
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="/">Trang chủ</a></li>
+                <li class="active">Đăng nhập</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Li's Breadcrumb Area End Here -->
+<!-- Begin Login Content Area -->
+<div class="page-section mb-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12 mb-30">
+                <!-- Login Form s-->
+                @using (Html.BeginForm("Login", "UserClient", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="login-form">
+                        <h4 class="login-title">Đăng nhập</h4>
+                        <div class="row">
+                            <div class="col-md-12 col-12 mb-20">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger alert alert-danger" })
+                            </div>
+                            <div class="col-md-12 col-12 mb-20">
+                                @Html.LabelFor(model => model.Email)
+                                @Html.TextBoxFor(model => model.Email, new { @type = "email", @placeholder = "" })
+                            </div>
+                            <div class="col-12 mb-20">
+                                @Html.LabelFor(model => model.Password)
+                                @Html.TextBoxFor(model => model.Password, new { @type = "password" })
+                            </div>
+                            <div class="col-md-6">
+                                <button class="register-button mt-0">Đăng nhập</button>
+                            </div>
+                            <div class="col-md-6 mt-10 mb-20 text-left text-md-right">
+                                <a href="/quen-mat-khau/"> Quên mật khẩu?</a>
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Login Content Area End Here -->

@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="shortcut icon" type="image/x-icon" href="~/Asset/Client/images/menu/logo/favicon.png">
+    @RenderPage("_CssHeader.cshtml")
+    @RenderSection("CssHeader", required: false)
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        @RenderPage("_Header.cshtml")
+        @RenderPage("_LeftMenu.cshtml")
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                    <small>@RenderSection("headertitle", required: false)</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-dashboard"></i> @RenderSection("headermenuroot", required: false)</a></li>
+                    <li class="active">@RenderSection("headermenusub", required: false)</li>
+                </ol>
+            </section>
+            @if (TempData["AlertMessage"] != null)
+            {
+                <div id="AlertBox" class="alert @TempData["AlertType"] hide">@TempData["AlertMessage"]</div>
+            }
+            @RenderBody()
+        </div>
+        @RenderPage("_Footer.cshtml")
+    </div>
+    @RenderPage("_JsFooter.cshtml")
+    @RenderSection("JsFooter", required: false)
+</body>
+</html>

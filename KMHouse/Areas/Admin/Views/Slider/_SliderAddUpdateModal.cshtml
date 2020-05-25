@@ -1,0 +1,55 @@
+﻿<!-- Modal -->
+<div class="modal fade" id="modalAddUpdate" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Cập nhật Slider</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" id="frmSlider">
+                    <div class="form-group-sm">
+                        <input type="hidden" class="form-control" id="txtID" value="0" />
+                        <label for="txtName">Tên:</label>
+                        <input type="text" class="form-control" name="txtName" id="txtName">
+
+                        <label for="txtTitle">Tiêu đề:</label>
+                        <input type="text" class="form-control" name="txtTitle" id="txtTitle">
+
+                        <label for="txtSeoTitle">Tiêu đề SEO:</label>
+                        <input type="text" class="form-control" name="txtSeoTitle" id="txtSeoTitle">
+
+                        <label for="txtDescription">Thông tin:</label>
+                        <input type="text" class="form-control" name="txtDescription" id="txtDescription">
+
+                        <label for="txtLink">Link:</label>
+                        <input type="text" class="form-control" name="txtLink" id="txtLink">
+
+
+                        <div class="form-group-sm">
+                            <label for="txtImage">Hình ảnh(780x480px):</label>
+                            <div>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="txtImage" id="txtImage">
+                                    <div class="input-group-btn">
+                                        <a id="btnImage" href="#" class="btn btn-sm bg-olive btn-flat">Duyệt</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <img id="imgSlide" height="100"/>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>

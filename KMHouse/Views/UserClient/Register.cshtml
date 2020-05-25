@@ -1,0 +1,73 @@
+﻿@model Models.ViewModels.RegisterModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Đăng ký tài khoản";
+}
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="/">Trang chủ</a></li>
+                <li class="active">Đăng ký thành viên</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Li's Breadcrumb Area End Here -->
+<!-- Begin Login Content Area -->
+<div class="page-section mb-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xs-12">
+                @using (Html.BeginForm("Register", "UserClient", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="login-form">
+                        <h4 class="login-title">Đăng ký</h4>
+                        <div class="row">
+                            <div class="col-md-12 col-12 mb-20">
+                                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                                @if (ViewBag.Success != null)
+                                {
+                                    <div class="alert alert-success">@ViewBag.Success</div>
+                                }
+                            </div>
+                            <div class="col-md-6 col-12 mb-20">
+                                @Html.LabelFor(model => model.Name)
+                                @Html.TextBoxFor(model => model.Name, new { @class = "mb-0", @type = "text", @required="true", @placeholder = "Họ tên của bạn" })
+                            </div>
+                            <div class="col-md-6 col-12 mb-20">
+                                @Html.LabelFor(model => model.Address)
+                                @Html.TextBoxFor(model => model.Address, new { @class = "mb-0", @type = "text", @required="true", @placeholder = "Nhập địa chỉ" })
+                            </div>
+                            <div class="col-md-6 col-12 mb-20">
+                                @Html.LabelFor(model => model.Phone)
+                                @Html.TextBoxFor(model => model.Phone, new { @class = "mb-0", @type = "tel",@pattern="[0-9]{10}", @required="true", @placeholder = "Nhập đủ 9 số điện thoại" })
+                            </div>
+                            <div class="col-md-6 col-12 mb-20">
+                                @Html.LabelFor(model => model.Email)
+                                @Html.TextBoxFor(model => model.Email, new { @class = "mb-0", @type = "email", @required="true", @placeholder = "Ex: abc@abc.com" })
+                            </div>
+                            <div class="col-md-4 mb-20">
+                                @Html.LabelFor(model => model.UserName)
+                                @Html.TextBoxFor(model => model.UserName, new { @class = "mb-0", @type = "text", @required="true", @placeholder = "Nhập tên đăng nhập" })
+                            </div>
+                            <div class="col-md-4 mb-20">
+                                @Html.LabelFor(model => model.Password)
+                                @Html.TextBoxFor(model => model.Password, new { @class = "mb-0", @type = "password", @required="true", @placeholder = "Nhập mật khẩu" })
+                            </div>
+                            <div class="col-md-4 mb-20">
+                                @Html.LabelFor(model => model.ConfirmPassword)
+                                @Html.TextBoxFor(model => model.ConfirmPassword, new { @class = "mb-0", @type = "password", @required="true", @placeholder = "Nhập lại mật khẩu" })
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="register-button mt-0">Đăng ký</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Login Content Area End Here -->

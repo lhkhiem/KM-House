@@ -1,0 +1,62 @@
+﻿@{
+    var productCategory = (List<Models.EF.ProductCategory>)ViewBag.ProductCategory;
+}
+<div class="col-lg-3">
+    <!--Category Menu Start-->
+    <div class="category-menu">
+        <div class="category-heading">
+            <h2 class="categories-toggle"><span>Danh mục</span></h2>
+        </div>
+        @{ var i = 1;
+            <div id="cate-toggle" class="category-menu-list">
+                        <ul>
+                            @foreach (var item in productCategory.Where(x => x.ParentID == null).OrderBy(x=>x.DisplayOrder))
+                            {
+
+                                var child = productCategory.Where(x => x.ParentID == item.ID);
+                                var parentClass = "";
+                                if (i <= 8)
+                                {
+                                    if (child.Count() > 0)
+                                    {
+                                        parentClass = "right-menu";
+                                    }
+                                }
+                                else if (i > 8)
+                                {
+                                    parentClass = "right-menu rx-child";
+                                }
+
+                                <li class="@parentClass">
+                                    <a href="/san-pham/@item.MetaTitle-@item.ID">@item.Name</a>
+                                    @if (child.Count() > 0)
+                                    {
+                                        <ul class="cat-mega-menu">
+                                            <li class="right-menu cat-mega-title">
+                                                @*<a href="san-pham/@item.MetaTitle-@item.ID">@item.Name</a>*@
+                                                <ul>
+                                                    @foreach (var childItem in child)
+                                                    {
+                                                        <li><a href="san-pham/@childItem.MetaTitle-@childItem.ID">@childItem.Name</a></li>
+                                                    }
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    }
+                                </li>
+                                i++;
+                            }
+                            @if (i>8)
+                            {
+                                <li class="rx-parent">
+                                    <a class="rx-default">Xem thêm</a>
+                                    <a class="rx-show">Thu nhỏ</a>
+                                </li>
+                            }
+
+                        </ul>
+            </div>}
+    </div>
+    <!--Category Menu End-->
+</div>
+

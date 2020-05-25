@@ -1,0 +1,107 @@
+﻿@model Models.EF.News
+@{
+    ViewBag.Title = "Tin tức";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@section JsFooter{
+    <script src="~/Asset/Admin/Js/controller/NewsController.js"></script>
+}
+@section headertitle{
+    Cập nhật tin tức
+    <span class="alert" style="color:rebeccapurple; margin-left:10px">
+        <i class="fa fa-info-circle"> @ViewBag.info</i>
+    </span>
+}
+@section headermenuroot{Tin tức}@section headermenusub{Cập nhật}
+<section class="content">
+    <div class="box box-default">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group-sm">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-sm-12 control-label" })
+                            <div class="col-sm-12">
+                                @Html.TextBoxFor(model => model.Name, htmlAttributes: new { @id = "txtName", @class = "form-control", @placeholder = "Tiêu đề tin", @required = "true" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group-sm">
+                            @Html.LabelFor(model => model.MetaTitle, htmlAttributes: new { @class = "col-sm-12 control-label" })
+                            <div class="col-sm-12">
+                                @Html.TextBoxFor(model => model.MetaTitle, htmlAttributes: new { @class = "form-control", @id = "txtMetaTitle", @required = "true" })
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group-sm">
+                            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "col-sm-6 control-label" })
+                            <div class="col-sm-12">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(model => model.Image, htmlAttributes: new { @id = "txtImage", @class = "form-control", @placeholder = "Duyệt Url ảnh", @required = "true" })
+                                    <div class="input-group-btn">
+                                        <a id="btnImage" href="#" class="btn btn-sm bg-olive btn-flat">Duyệt</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group-sm">
+                            @Html.LabelFor(model => model.Tag, htmlAttributes: new { @class = "col-sm-12 control-label" })
+                            <div class="col-sm-12">
+                                @Html.TextBoxFor(model => model.Tag, htmlAttributes: new { @class = "form-control", @id = "txtMetaTitle", @required = "true", @placeholder = "tag1,tag2,tag3,tagx.." })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group-sm">
+                            @Html.LabelFor(model => model.NewsCategoryID, htmlAttributes: new { @class = "col-sm-12 control-label" })
+                            <div class="col-sm-12">
+                                @Html.DropDownListFor(model => model.NewsCategoryID, null, htmlAttributes: new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group-sm">
+                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "col-sm-6 control-label" })
+                            <div class="col-sm-12">
+                                @Html.TextAreaFor(model => model.Description, htmlAttributes: new { @id = "txtDescription", @class = "form-control", @placeholder = "Mô tả ngắn", @required = "true" })
+                                <script>CKEDITOR.replace("txtDescription");</script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group-sm">
+                            @Html.LabelFor(model => model.Detail, htmlAttributes: new { @class = "col-sm-6 control-label" })
+                            <div class="col-sm-12">
+                                @Html.TextAreaFor(model => model.Detail, htmlAttributes: new { @id = "txtDetail", @class = "form-control", @placeholder = "Chi tiết tin", @required = "true" })
+                                <script>CKEDITOR.replace("txtDetail");</script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-info btn-sm">Cập nhật</button>
+                    <a href="@Url.Action("Index")" class="btn btn-success btn-sm">Danh sách</a>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+

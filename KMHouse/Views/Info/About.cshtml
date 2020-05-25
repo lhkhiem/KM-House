@@ -1,0 +1,26 @@
+﻿@model Models.EF.About
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Giới thiệu";
+}
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="/">Trang chủ</a></li>
+                <li class="active">Giới thiệu</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="about-us-wrapper pt-60 pb-40">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 order-last order-lg-first">
+                @Html.Raw(Model.Detail)
+            </div>
+        </div>
+    </div>
+</div>
+
+

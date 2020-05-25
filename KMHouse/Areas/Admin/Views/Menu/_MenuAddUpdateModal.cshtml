@@ -1,0 +1,46 @@
+﻿<!-- Modal -->
+<div class="modal fade" id="modalAddUpdate" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Thêm/Sửa Loại Menu</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" id="frmMenu">
+                    <div class="form-group form-group-sm">
+                        <input type="hidden" class="form-control" id="txtID" value="0" />
+                        <label class="col-sm-3 control-label" for="txtText">Tên:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="txtText" id="txtText">
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label" for="txtLink">Link:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="txtLink" id="txtLink">
+                        </div>
+
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-3 control-label" for="sltTarget">Thuộc tính:</label>
+                        <div class="col-sm-9">
+                            <select id="sltTarget" class="form-control input-sm">
+                                <option value="_self">self</option>
+                                <option value="_blank">blank</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>

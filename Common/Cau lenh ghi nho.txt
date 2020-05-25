@@ -1,0 +1,45 @@
+﻿1. Sử dụng Dropdownlist 
+	- Tạo ViewBag truyền lên View, trường hợp tất cả danh sách
+		public void SetDropdownList(string selectedId = null)
+        {
+            var dao = new UserGroupDao();
+            ViewBag.UserGroupID = new SelectList(dao.ListAll(), "ID", "Name", selectedId);
+        }
+	- Trường hợp lọc danh sách có điều kiện
+		public void SetDropdownList(string userGroupId,string selectedId = null)
+        {
+            var listRole = new CredentialDao().CheckRoleExist(userGroupId);
+            ViewBag.UserGroupID = new SelectList(listRole, "ID", "Name", selectedId);
+        }
+	- Câu lệnh truy vấn LINQ trong tập hợp A không có trong tập hợp B(Not in sql)
+		var model =
+					(from a in db.Roles
+					 select new
+					 {
+						 ID = a.ID,
+						 Name = a.Name
+					 }).Except
+						(from b in db.Credentials
+							join c in db.Roles on b.RoleID equals c.ID
+							where b.UserGroupID.Equals(userGruopID)
+							select new
+							{
+								ID = b.RoleID,
+								Name = c.Name
+							}
+						).AsEnumerable().Select(x => new Role()
+						{
+							ID = x.ID,
+							Name = x.Name
+						});
+				return model.ToList();
+	- Gọi dự liệu trên View
+		@Html.DropDownList("ddlUserGroup", (IEnumerable<SelectListItem>)ViewBag.UserGroupID, htmlAttributes: new { @class = "form-control" })
+
+2. Truy vấn LINQ lấy ra một bảng ghi đầu tiên FirstOrDefault()
+	ví dụ: var about = db.Abouts.FirstOrDefault();
+	Lưu ý: trong Entity Model phải có khóa [Key] cho thuộc tính ID mới sử dụng được
+
+3. Để sử dụng được CkFinder ta phải Add References các file .dll trong thư mục ...bin/debug của plugin CKFinder
+	Câu lệnh gọi thuần java được viết ở cuối trang Layout.
+4. Để hiển thị lỗi cụ thể mở file web.config tìm đến dòng lệnh <customErrors mode="On"> đổi thành <customErrors mode="Off">

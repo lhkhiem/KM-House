@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "Footer";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@section headertitle{Footer}@section headermenuroot{Footer}@section headermenusub{Danh sách}
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <a href="@Url.Action("Create")" id="btnAddNew" class="btn btn-default btn-sm">
+                                <i class="fa fa-plus"></i>
+                                Tạo mới
+                            </a>
+                            <button class="btn btn-danger btn-sm btnReset">
+                                <i class="fa fa-refresh"></i>
+                                Tải lại
+                            </button>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="input-group">
+                                <span class="input-group-addon">Tìm theo</span>
+                                <select class="form-control input-sm" id="sltTypeSearch" name="typeSearch">
+                                    <option value="0">Tất cả</option>
+                                    <option value="1">Tên</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="input-group input-group-sm">
+                                <input id="txtKeyword" value="" name="keyword" class="form-control input-sm" placeholder="Nhập từ khóa tìm kiếm" />
+                                <span class="input-group-btn">
+                                    <button id="btnSearch" type="submit" class="btn btn-info btn-flat"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="input-group input-group-sm">
+                                <select id="sltPageSize" class="form-control" name="PageSize">
+                                    @for (int i = 5; i <= 100; i += 5)
+                                    {
+                                        <option value="@i">@i</option>
+                                    }
+                                </select>
+                                <span class="input-group-btn">
+                                    <label class="btn">dòng/trang</label>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table id="table" class="table table-bordered table-hover table-condensed">
+                        <thead>
+                            <tr>
+                                <th><span style="margin-left:5px">#</span></th>
+                                <th>ID</th>
+                                <th>Tên</th>
+                                <th>Mặc định</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblData"></tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label id="status" class="text-gray label label-success">Normal</label>
+                        </div>
+                        <div class="col-md-3">
+
+                        </div>
+                        <div class="col-md-3">
+
+                        </div>
+                        <div class="col-md-3">
+                            <p id="lbTotal" class="text-right text-bold text-blue"></p>
+                        </div>
+                    </div>
+                    <div id="pagination" class="pagination pull-left">
+                    </div>
+                    <script id="data-template" type="x-tmpl-mustache">
+                        <tr>
+                            <td style="width:60px">
+                                <a href="Footer/Edit/{{ID}}" class="btn-primary btn-edit" data-id="{{ID}}"><i class="fa fa-fw fa-edit"></i></a>
+                                <a class="btn-danger btn-delete" data-id="{{ID}}"><i class="fa fa-fw fa-remove"></i></a>
+                            </td>
+                            <td style="width:60px">{{ID}}</td>
+                            <td>{{Name}}</td>
+                            <td>{{{Status}}}</td>
+                        </tr>
+                    </script>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section JsFooter
+{
+    <script src="~/Asset/Admin/Js/mustache.min.js"></script>
+    <script src="~/Asset/Admin/Js/jquery.twbsPagination.min.js"></script>
+    <script src="~/Asset/Admin/Js/bootbox.min.js"></script>
+    <script src="~/Asset/Admin/Js/controller/FooterController.js"></script>
+}

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Models.ViewModels.OrderDetailViewModel>
+@{
+    ViewBag.Title = "Chi tiết đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@section headertitle{Chi tiết đơn hàng}@section headermenuroot{Đơn hàng}@section headermenusub{Chi tiết}
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <div class="row">
+                        <div class="col-sm-1">
+                            <a href="@Url.Action("Index")" id="btnAddNew" class="btn btn-info btn-sm">
+                                <i class="fa fa-arrow-left"></i> Quay lại</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="table-content table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="li-product-thumbnail">Hình ảnh</th>
+                                    <th class="cart-product-name">Tên sản phẩm</th>
+                                    <th class="li-product-price">Giá</th>
+                                    <th class="li-product-quantity">Số lượng</th>
+                                    <th class="li-product-subtotal">Thành tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="li-product-thumbnail"><img src="@item.ProductImage" alt="KStore" height="50"></td>
+                                        <td class="li-product-name">@item.ProductName</td>
+                                        <td class="li-product-price">@item.Price.Value.ToString("N0")</td>
+                                        <td class="li-product-name">@item.Quantity</td>
+                                        <td class="product-subtotal"><span class="amount">@((item.Price.Value * item.Quantity).ToString("N0")) đ</span></td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th colspan="4" class="product-subtotal">TỔNG CỘNG</th>
+                                    <th class="product-subtotal">@(Model.Sum(x => x.Price.Value * x.Quantity).ToString("N0")) đ</th>
+                                </tr>
+                            </tfoot>
+
+                        </table>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+

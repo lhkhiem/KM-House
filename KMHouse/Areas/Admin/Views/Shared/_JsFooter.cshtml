@@ -1,0 +1,62 @@
+﻿<script src="~/Asset/Admin/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="~/Asset/Admin/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="~/Asset/Admin/dist/js/adminlte.min.js"></script>
+<script src="~/Asset/Admin/plugins/iCheck/icheck.min.js"></script>
+<script src="~/Asset/Admin/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script src="~/Asset/Admin/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="~/Asset/Admin/Js/jquery.validate.min.js"></script>
+<script src="~/Asset/Admin/Js/mustache.min.js"></script>
+<script src="~/Asset/Admin/Js/jquery.twbsPagination.min.js"></script>
+<script src="~/Asset/Admin/Js/bootbox.min.js"></script>
+<script src="~/Asset/Admin/Js/numeral.min.js"></script>
+
+<script>
+    //Code active khi click không Reload
+        //$(document).ready(function () {
+        //    $('ul li a').click(function () {
+        //        $('li').removeClass("active");
+        //        $(this).parent().addClass("active");
+        //        $(this).parent().parent().parent().addClass("active");
+        //    });
+        //});
+        //Code active khi click khi Reload, Truyền từ Controller
+    $(document).ready(function () {
+        try {
+            $('#@ViewBag.MenuActive').addClass('active');
+            $('#@ViewBag.MenuActive').parent().parent().addClass('active');
+        }
+        catch (e) {
+        }
+        });
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+            checkboxClass: 'icheckbox_flat-green',
+            radioClass: 'iradio_flat-green',
+        });
+</script>
+<script>
+    //mở CKfinfer để quản lý ảnh
+    $(document).ready(function () {
+        $('#btnImage').on('click', function (e) {
+            e.preventDefault();
+            var fider = new CKFinder();
+            fider.selectActionFunction = function (url) {
+                $('#txtImage').val(url);
+            };
+            fider.popup();
+        })
+    })
+</script>
+<script>
+    //xu lý báo thêm mới or cập nhật thanh công
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(0, function () {
+            $(this).remove();
+        });
+    }, 4000);
+
+    //Date picker, xử lý ngày tháng năm
+        $('#datepicker1').datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true
+        })
+</script>

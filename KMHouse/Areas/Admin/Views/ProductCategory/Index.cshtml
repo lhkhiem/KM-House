@@ -1,0 +1,131 @@
+﻿@model Models.EF.ProductCategory
+@{
+    ViewBag.Title = "Danh mục sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@section headertitle{Danh sách danh mục sản phẩm}@section headermenuroot{Danh mục sản phẩm}@section headermenusub{Danh sách}
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <button id="btnAddNew" class="btn btn-default btn-sm">
+                                <i class="fa fa-plus"></i>Tạo mới
+                            </button>
+                            <button id="btnReset" class="btn btn-danger btn-sm">
+                                <i class="fa fa-refresh"></i>Tải lại
+                            </button>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="input-group">
+                                <span class="input-group-addon">Tìm theo</span>
+                                <select class="form-control input-sm" id="sltTypeSearch" name="typeSearch">
+                                    <option value="0">Tất cả</option>
+                                    <option value="1">Tên danh mục</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="input-group input-group-sm">
+                                <input id="txtKeyword" value="" name="keyword" class="form-control input-sm" placeholder="Nhập từ khóa tìm kiếm" />
+                                <span class="input-group-btn">
+                                    <button id="btnSearch" type="submit" class="btn btn-info btn-flat"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="input-group input-group-sm">
+                                <select id="sltPageSize" class="form-control" name="PageSize">
+                                    @for (int i = 10; i <= 100; i += 5)
+                                    {
+                                        <option value="@i">@i</option>
+                                    }
+                                </select>
+                                <span class="input-group-btn">
+                                    <label class="btn">dòng/trang</label>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-body">
+
+                    <table id="table" class="table table-bordered table-hover table-condensed">
+                        <thead>
+                            <tr>
+                                <th><span style="margin-left:5px">#</span></th>
+                                <th>ID</th>
+                                <th>Sắp xếp</th>
+                                <th>Tên danh mục</th>
+                                <th>Meta title</th>
+                                <th>Ngày tạo</th>
+                                <th>Người tạo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblData"></tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label id="status" class="text-gray label label-success">Normal</label>
+                        </div>
+                        <div class="col-md-3">
+
+                        </div>
+                        <div class="col-md-3">
+
+                        </div>
+                        <div class="col-md-3">
+                            <p id="lbTotal" class="text-right text-bold text-blue"></p>
+                        </div>
+                    </div>
+                    <div id="pagination" class="pagination pull-left">
+                    </div>
+                    <script id="data-template" type="x-tmpl-mustache">
+                        <tr>
+                            <td style="width:60px">
+                                <a class="btn-primary btn-edit" data-id="{{ID}}"><i class="fa fa-fw fa-edit"></i></a>
+                                <a class="btn-danger btn-delete" data-id="{{ID}}"><i class="fa fa-fw fa-remove"></i></a>
+                            </td>
+                            <td>{{ID}}</td>
+                            <td style="width:70px">
+                                <select data-id="{{ID}}" class="form-control input-sm sltOrder">
+                                    <option value="{{Order}}">{{Order}}</option>
+                                    @for (int i = 1; i <= 50; i++)
+                                    {
+                                        <option value="@i">@i</option>
+                                    }
+                                </select>
+                            </td>
+                            <td>{{Name}}</td>
+                            <td>{{MetaTitle}}</td>
+                            <td>{{CreateDate}}</td>
+                            <td>{{CreateBy}}</td>
+                        </tr>
+                    </script>
+                    <script id="data-template2" type="x-tmpl-mustache">
+                        <tr>
+                            <td style="width:60px">
+                                <a class="btn-primary btn-edit" data-id="{{ID}}"><i class="fa fa-fw fa-edit"></i></a>
+                                <a class="btn-danger btn-delete" data-id="{{ID}}"><i class="fa fa-fw fa-remove"></i></a>
+                            </td>
+                            <td>{{ID}}</td>
+                            <td></td>
+                            <td>{{Name}}</td>
+                            <td>{{MetaTitle}}</td>
+                            <td>{{CreateDate}}</td>
+                            <td>{{CreateBy}}</td>
+                        </tr>
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@RenderPage("_ProductCategoryAddUpdateModal.cshtml")
+@section JsFooter
+{
+    <script src="~/Asset/Admin/Js/controller/ProductCategoryController.js"></script>
+}
+
