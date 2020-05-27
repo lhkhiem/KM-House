@@ -256,5 +256,10 @@ namespace KMHouse.Controllers
             ViewBag.MaxPage = maxPage;
             return View(model);
         }
+        public ActionResult PrintView(long id)
+        {
+            var product = new ProductDao().GetByIDView(id);
+            return View(product);
+        }
     }
 }

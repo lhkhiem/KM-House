@@ -295,34 +295,20 @@
                                     <div class="lg-image">
                                         <img id="quick-view-image" alt="product image">
                                     </div>
-                                    @*<div class="lg-image">
-                                            <img src="/Asset/Client/images/product/large-size/2.jpg" alt="product image">
-                                        </div>
-                                        <div class="lg-image">
-                                            <img src="/Asset/Client/images/product/large-size/3.jpg" alt="product image">
-                                        </div>
-                                        <div class="lg-image">
-                                            <img src="/Asset/Client/images/product/large-size/4.jpg" alt="product image">
-                                        </div>
-                                        <div class="lg-image">
-                                            <img src="/Asset/Client/images/product/large-size/5.jpg" alt="product image">
-                                        </div>
-                                        <div class="lg-image">
-                                            <img src="/Asset/Client/images/product/large-size/6.jpg" alt="product image">
-                                        </div>*@
                                 </div>
-                                @*<div class="product-details-thumbs slider-thumbs-1">
-                                        <div class="sm-image"><img src="/Asset/Client/images/product/small-size/1.jpg" alt="product image thumb"></div>
-                                        <div class="sm-image"><img src="/Asset/Client/images/product/small-size/2.jpg" alt="product image thumb"></div>
-                                        <div class="sm-image"><img src="/Asset/Client/images/product/small-size/3.jpg" alt="product image thumb"></div>
-                                        <div class="sm-image"><img src="/Asset/Client/images/product/small-size/4.jpg" alt="product image thumb"></div>
-                                        <div class="sm-image"><img src="/Asset/Client/images/product/small-size/5.jpg" alt="product image thumb"></div>
-                                        <div class="sm-image"><img src="/Asset/Client/images/product/small-size/6.jpg" alt="product image thumb"></div>
-                                    </div>*@
+                                <div class="product-additional-info pt-25">
+                                    <label>Chia sẻ:</label>
+                                    <div class="product-social-sharing pt-25">
+                                        <ul>
+                                            <li class="facebook"><a href="#"><i class="fa fa-facebook"></i>Facebook</a></li>
+                                            <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i>Google +</a></li>
+                                            <li class="print"><a href="#"><i class="fa fa-print"></i>In mẫu</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                             <!--// Product Details Left -->
                         </div>
-
                         <div class="col-lg-7 col-md-6 col-sm-6">
                             <div class="product-details-view-content pt-60">
                                 <div class="product-info">
@@ -331,10 +317,7 @@
                                     <div id="price" class="price-box pt-20">
                                     </div>
                                     <div class="product-desc">
-                                        <p>
-                                            <span id="quick-view-description">
-                                            </span>
-                                        </p>
+                                        <p><span id="quick-view-description"></span></p>
                                     </div>
                                     <div class="single-add-to-cart">
                                         <form action="#" class="cart-quantity">
@@ -348,17 +331,6 @@
                                             </div>
                                             <button id="btnCart" class="add-to-cart addCart"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ</button>
                                         </form>
-                                    </div>
-                                    <div class="product-additional-info pt-25">
-                                        <label>Chia sẻ:</label>
-                                        <div class="product-social-sharing pt-25">
-                                            <ul>
-                                                <li class="facebook"><a href="#"><i class="fa fa-facebook"></i>Facebook</a></li>
-                                                <li class="twitter"><a href="#"><i class="fa fa-twitter"></i>Twitter</a></li>
-                                                <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i>Google +</a></li>
-                                                <li class="print"><a href="#"><i class="fa fa-print"></i>In mẫu</a></li>
-                                            </ul>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -419,6 +391,7 @@
     <script src="~/Asset/Client/js/controller/QuickView.js"></script>
     <script src="~/Asset/Client/js/controller/SendFeedback.js"></script>
     <script src="~/Asset/Admin/Js/jquery.validate.min.js"></script>
+    
     @RenderSection("ScriptFooter", false)
 
 </body>

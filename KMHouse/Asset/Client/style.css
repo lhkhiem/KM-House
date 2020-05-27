@@ -5465,8 +5465,8 @@ span.required {
 .product-additional-info .pt-25 {
     padding-top: 5px !important;
 }
-.print{
-	background: #ee6677;
+.print {
+    background: #6E697A;
 }
 .phone{
 	font-size: 16px;
@@ -5540,4 +5540,8 @@ a, button, input {
     height: 30px;
     line-height: 30px;
 }
-    /*-----------------------------------------------------------------------------------*/
+.print-view {
+    background: url('images/menu/logo/logo-opacity.png');
+    margin:auto;
+}
+/*-----------------------------------------------------------------------------------*/

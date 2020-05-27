@@ -3,6 +3,7 @@ using Models.ViewModels;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Common;
+using System.Xml.Linq;
 
 namespace KMHouse.Controllers
 {
@@ -47,14 +48,36 @@ namespace KMHouse.Controllers
 
             return View();
         }
+        public List<string> LoadImages(long id)
+        {
+            ProductDao dao = new ProductDao();
+            var product = dao.GetByID(id);
+            var images = product.MoreImage;
+            List<string> listImagesReturn = new List<string>();
+            if (images != null)
+            {
+                XElement xImages = XElement.Parse(images);
+                foreach (XElement element in xImages.Elements())
+                {
+                    listImagesReturn.Add(element.Value);
+                }
+                return listImagesReturn;
+            }
+            else
+            {
+                return listImagesReturn;
+            }
+
+        }
         //Hàm lấy giá trị hiển thị QuickView
         public JsonResult QuickView(long id)
         {
             var model = new ProductDao().GetByIDView(id);
+            ViewBag.ListImage = this.LoadImages(id);
             ViewBag.QuickViewProduct = model;
             return Json(new
             {
-                data=model,
+                data = model,
                 status = true,
             }, JsonRequestBehavior.AllowGet);
         }

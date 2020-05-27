@@ -108,9 +108,8 @@
                             <div class="product-social-sharing pt-25">
                                 <ul>
                                     <li class="facebook"><a href="#"><i class="fa fa-facebook"></i>Facebook</a></li>
-                                    <li class="twitter"><a href="#"><i class="fa fa-twitter"></i>Twitter</a></li>
                                     <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i>Google +</a></li>
-                                    <li class="print"><a href="#"><i class="fa fa-print"></i>In mẫu</a></li>
+                                    <li class="print"><a href="/print-view/@Model.ID" target="_blank"><i class="fa fa-print"></i>In mẫu</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -209,8 +208,8 @@
                                                         <li><i class="fa fa-star-o"></i></li>
                                                         <li><i class="fa fa-star-o"></i></li>
                                                         <li><i class="fa fa-star-o"></i></li>
-                                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -242,8 +241,8 @@
                                         <div class="add-actions">
                                             <ul class="add-actions-link">
                                                 <li data-id="@item.ID" class="add-cart active addCart"><a><i class="fa fa-shopping-cart"></i>Giỏ hàng</a></li>
-                                                <li><a data-id="@item.ID" title="quick view" class="quick-view-btn quick-view-product"><i class="fa fa-eye"></i></a></li>
-                                                <li><a class="links-details" href="#"><i class="fa fa-print"></i></a></li>
+                                                <li><a data-id="@item.ID" title="xem nhanh" class="quick-view-btn quick-view-product"><i class="fa fa-eye"></i></a></li>
+                                                <li><a class="links-details" href="print-view/@item.ID" target="_blank"><i class="fa fa-print"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>

@@ -197,10 +197,13 @@
     <Content Include="Asset\Admin\Js\controller\NewsCategoryController.js" />
     <Content Include="Asset\Admin\Js\controller\NewsController.js" />
     <Content Include="Asset\Client\images\menu\logo\favicon.png" />
+    <Content Include="Asset\Client\images\menu\logo\logo-opacity.png" />
     <Content Include="Asset\Client\images\menu\logo\logo.png" />
     <Content Include="Asset\Client\images\menu\logo\logo2.png" />
     <Content Include="Asset\Client\js\controller\SendFeedback.js" />
+    <Content Include="Asset\Client\js\jQuery.print.js" />
     <Content Include="Asset\Client\template\feedback.html" />
+    <Content Include="Asset\Client\template\printview.html" />
     <Content Include="Content\Site.css" />
     <Content Include="Media\images\1.jpg" />
     <Content Include="Media\images\10.jpg" />
@@ -8650,6 +8653,7 @@
     <Content Include="Views\Info\Contact.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Views\ProductHome\ProductTag.cshtml" />
+    <Content Include="Views\ProductHome\PrintView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Asset\Admin\bower_components\fullcalendar\dist\fullcalendar.d.ts" />
